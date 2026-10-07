@@ -18,6 +18,13 @@
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease-in-out;
         }
     </style>
+    <script>
+    window.MathJax = {
+        tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+    };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans overflow-x-hidden">
 
@@ -567,6 +574,10 @@ ${data.conceptGuide.diagramText}
                 drawer.classList.remove('translate-x-full');
             }, 10);
             document.body.style.overflow = 'hidden'; // 禁止底页滚动
+if (window.MathJax && window.MathJax.typesetPromise) {
+    MathJax.typesetPromise([document.getElementById('drawerBody')]);
+}
+
         }
 
         // 关闭抽屉
