@@ -349,31 +349,6 @@
                 ]
             },
                      
-                    {
-                        title: "雙垂直母子型與射影定理計算",
-                        problem: "在 $\\text{Rt}\\triangle ABC$ 中，$\\angle ACB = 90^\\circ$，$CD \\perp AB$ 於點 $D$。若 $AD = 2$，$BD = 8$，求線段 $CD$ 與 $AC$ 的長度。",
-                        analysis: "1. 識別構型：$\\text{Rt}\\triangle ABC$ 斜邊作高 $CD$，為標準『雙垂直母子相似』；\n2. 證明 $\\triangle ACD \\sim \\triangle CBD$ 與 $\\triangle ACD \\sim \\triangle ABC$；\n3. 利用射影定理：$CD^2 = AD \\cdot BD$ 求高，$AC^2 = AD \\cdot AB$ 求直角邊。",
-                        solution: "解：∵ $\\angle ACB = 90^\\circ$，$CD \\perp AB$，\n∴ $\\angle ADC = \\angle CDB = 90^\\circ$。\n∴ $\\angle CAD + \\angle ACD = 90^\\circ$，$\\angle BCD + \\angle ACD = 90^\\circ$，\n∴ $\\angle CAD = \\angle BCD$。\n∴ $\\triangle ACD \\sim \\triangle CBD$。\n∴ $\\frac{CD}{BD} = \\frac{AD}{CD}$，即 $CD^2 = AD \\cdot BD$。\n∵ $AD = 2$，$BD = 8$，\n∴ $CD^2 = 2 \\times 8 = 16$，解得 $CD = 4$。\n又 ∵ $AB = AD + BD = 2 + 8 = 10$，\n在 $\\text{Rt}\\triangle ACD$ 中，由勾股定理得：\n$AC = \\sqrt{AD^2 + CD^2} = \\sqrt{2^2 + 4^2} = 2\\sqrt{5}$。\n（或由 $\\triangle ACD \\sim \\triangle ABC$ 得 $AC^2 = AD \\cdot AB = 2 \\times 10 = 20$，解得 $AC = 2\\sqrt{5}$）"
-                    },
-                    {
-                        title: "一線三等角動態探究與線段乘積",
-                        problem: "在矩形 $ABCD$ 中，$AB = 4$，$BC = 6$，點 $P$ 是邊 $BC$ 上的一動點（不與點 $B, C$ 重合），作 $\\angle APE = 90^\\circ$，$PE$ 交直線 $CD$ 於點 $E$。\n(1) 求證：$\\triangle ABP \\sim \\triangle PCE$；\n(2) 設 $BP = x$，$CE = y$，求 $y$ 關於 $x$ 的函數解析式。",
-                        analysis: "1. 識別構型：點 $B, P, C$ 在同一直線上，$\\angle B = \\angle C = \\angle APE = 90^\\circ$，標準『一線三直角模型』；\n2. 利用互餘關係轉化角相等證明相似；\n3. 根據相似比對應線段比例列出含 $x, y$ 的等式，整理出函數關係式。",
-                        solution: "(1) 證明：∵ 四邊形 $ABCD$ 是矩形，\n∴ $\\angle B = \\angle C = 90^\\circ$。\n∴ $\\angle BAP + \\angle APB = 90^\\circ$。\n∵ $\\angle APE = 90^\\circ$，$B, P, C$ 在同一直線上，\n∴ $\\angle APB + \\angle EPC = 180^\\circ - \\angle APE = 90^\\circ$。\n∴ $\\angle BAP = \\angle EPC$。\n又 ∵ $\\angle B = \\angle C = 90^\\circ$，\n∴ $\\triangle ABP \\sim \\triangle PCE$。\n\n(2) 解：∵ $\\triangle ABP \\sim \\triangle PCE$，\n∴ $\\frac{AB}{PC} = \\frac{BP}{CE}$。\n∵ $AB = 4$，$BC = 6$，$BP = x$，\n∴ $PC = BC - BP = 6 - x$。\n將 $AB = 4$，$PC = 6 - x$，$BP = x$，$CE = y$ 代入比例式，得：\n$\\frac{4}{6 - x} = \\frac{x}{y}$。\n∴ $4y = x(6 - x) = -x^2 + 6x$，\n即 $y = -\\frac{1}{4}x^2 + \\frac{3}{2}x$。\n自變量 $x$ 的取值範圍為：$0 < x < 6$。"
-                    }
-                ],
-                traps: [
-                    {
-                        trap: "書寫相似比時未將對應字母嚴格順序對齊，導致線段交叉比對錯誤失分。",
-                        tip: "口訣：寫出相似先對點，頂點字母排整齊；上下對應分子分母，杜絕盲猜列比例！"
-                    },
-                    {
-                        trap: "誤將相似比與面積比等同，遺漏平方關係（誤將相似比 $1:2$ 當作面積比 $1:2$ 運算）。",
-                        tip: "口訣：周長之比等相似，面積之比方差倍；見比求面必套方，莫把邊長充面積！"
-                    }
-                ]
-            }
-
         };
 
         const modulesList = [
