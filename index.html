@@ -456,6 +456,42 @@
                     }
                 ]
             },
+                        "5.1": {
+                title: "5.1 相似三角形的判定與基本性質",
+                tag: "湖南必考選填 / 解答題第1問",
+                examInsights: {
+                    type: "選擇題第 6~8 題、填空題第 12/13 題，或幾何大題第 (1) 問，分值 3~6 分",
+                    trend: "全省統考必考基礎幾何。命題核心考查：① 利用平行線或等角證相似，列比例式求線段長；② 結合相似比求對應高、周長比與面積比；③ 幾何書寫中對應頂點字母嚴格對齊。"
+                },
+                conceptGuide: {
+                    desc: "相似三角形本質是形狀相同、大小不同的圖形縮放。核心把握『三大判定法』與『一比三比方』性質。",
+                    diagramText: "【三大判定定理速記口訣】\n► 判定 ①（雙角法）: 兩角分別相等 ──► 兩三角形相似（最常用，中考 80% 均考此法）\n► 判定 ②（夾角法）: 兩邊成比例且『夾角』相等 ──► 兩三角形相似（切記必須是夾角！）\n► 判定 ③（三邊法）: 三組對應邊成比例 ──► 兩三角形相似\n\n【核心性質模型（設相似比為 $k$）】\n① 邊角基本性質: 對應角相等，對應邊成比例（$\\frac{AB}{DE} = \\frac{BC}{EF} = \\frac{AC}{DF} = k$）\n② 線段延伸性質: 對應高之比 = 對應中線之比 = 對應角平分線之比 = 周長之比 = $k$\n③ 面積延伸核心: 相似三角形面積比 = 相似比的平方（$\\frac{S_1}{S_2} = k^2$）"
+                },
+                examples: [
+                    {
+                        title: "平行線與邊長比例計算",
+                        problem: "如圖，在 $\\triangle ABC$ 中，$D, E$ 分別是邊 $AB, AC$ 上的點，且 $DE \\parallel BC$。若 $AD = 2$，$DB = 3$，$DE = 4$，求 $BC$ 的長度。",
+                        analysis: "1. 識別構型：$DE \\parallel BC$ 構成經典 A 字型平行截割；\n2. 證明 $\\triangle ADE \\sim \\triangle ABC$；\n3. 關鍵注意比例：相似比為 $\\frac{AD}{AB}$，其中 $AB = AD + DB = 2 + 3 = 5$；\n4. 列比例式求 $BC$。",
+                        solution: "解：∵ $DE \\parallel BC$，\n∴ $\\angle ADE = \\angle B$，$\\angle AED = \\angle C$。\n∴ $\\triangle ADE \\sim \\triangle ABC$。\n∴ $\\frac{AD}{AB} = \\frac{DE}{BC}$。\n∵ $AD = 2$，$DB = 3$，\n∴ $AB = AD + DB = 2 + 3 = 5$。\n∴ $\\frac{2}{5} = \\frac{4}{BC}$。\n解得：$BC = 10$。"
+                    },
+                    {
+                        title: "相似比與面積比綜合轉化",
+                        problem: "如圖，在 $\\triangle ABC$ 中，$D, E$ 分別是 $AB, AC$ 上的點，且 $\\triangle ADE \\sim \\triangle ABC$。若 $\\frac{AD}{AB} = \\frac{1}{2}$，$\\triangle ADE$ 的面積為 3，求四邊形 $DBCE$ 的面積。",
+                        analysis: "1. 相似比 $k = \\frac{AD}{AB} = \\frac{1}{2}$；\n2. 面積比為相似比的平方：$\\frac{S_{\\triangle ADE}}{S_{\\triangle ABC}} = \\left(\\frac{1}{2}\\right)^2 = \\frac{1}{4}$；\n3. 求出 $\\triangle ABC$ 總面積，用整體減部分得出四邊形面積。",
+                        solution: "解：∵ $\\triangle ADE \\sim \\triangle ABC$，且相似比 $\\frac{AD}{AB} = \\frac{1}{2}$，\n∴ $\\frac{S_{\\triangle ADE}}{S_{\\triangle ABC}} = \\left(\\frac{AD}{AB}\\right)^2 = \\left(\\frac{1}{2}\\right)^2 = \\frac{1}{4}$。\n∵ $S_{\\triangle ADE} = 3$，\n∴ $S_{\\triangle ABC} = 4 \\times S_{\\triangle ADE} = 4 \\times 3 = 12$。\n∴ $S_{四邊形 DBCE} = S_{\\triangle ABC} - S_{\\triangle ADE} = 12 - 3 = 9$。"
+                    }
+                ],
+                traps: [
+                    {
+                        trap: "誤用兩邊成比例及非夾角（SSA）判定相似，導致判定無效扣分。",
+                        tip: "口訣：兩邊成比例，必看所夾角；若非夾中間，相似不能保！"
+                    },
+                    {
+                        trap: "計算面積比時遺漏平方，直接用相似比當作面積比運算。",
+                        tip: "口訣：線段之比是一次方，面積之比必平方；求四邊形用差值，大圖減小莫算偏！"
+                    }
+                ]
+            },
                         "5.2": {
                 title: "5.2 相似三角形四大核心模型與綜合探究（A字型、8字型、母子型、一線三等角）",
                 tag: "湖南必考解答題第 23~24 題",
@@ -536,13 +572,13 @@
                         subItems: [
                             { code: "4.1", title: "4.1 一次函数图象性质、交点坐标及动点面积", ready: true},
                             { code: "4.2", title: "4.2 反比例函数 k 的几何意义与割补法面积模型", ready: true },
-                            { code: "4.3", title: "4.3 一次与反比例函数交点问题与不等式图象法", ready: false }
+                            { code: "4.3", title: "4.3 一次与反比例函数交点问题与不等式图象法", ready: true }
                         ]
                     },
                     {
                         name: "专题 5：二次函数的解析表达与性质深拓",
                         subItems: [
-                            { code: "5.1", title: "5.1 二次函数三类解析式确定与特征转化", ready: false },
+                            { code: "5.1", title: "5.1 二次函数三类解析式确定与特征转化", ready: true },
                             { code: "5.2", title: "5.2 二次函数图象特征与 a, b, c 综合判定", ready: true },
                             { code: "5.3", title: "5.3 对称轴增减性与二次函数闭区间最值模型", ready: false }
                         ]
