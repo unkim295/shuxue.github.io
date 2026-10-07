@@ -12,19 +12,18 @@
         .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-        
-        /* 抽屉过渡动画 */
         .drawer-transition {
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease-in-out;
         }
     </style>
-    <script>
-    window.MathJax = {
-        tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
-    };
-</script>
-<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 
+    <!-- MathJax 公式渲染引擎 -->
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+        };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans overflow-x-hidden">
 
@@ -54,7 +53,7 @@
         </div>
     </header>
 
-    <!-- 进度与提示横幅 -->
+    <!-- 进度打卡 -->
     <div class="max-w-7xl mx-auto px-4 pt-4 pb-2 w-full">
         <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="flex items-center space-x-3">
@@ -76,14 +75,12 @@
 
     <!-- 主目录展示区 -->
     <main class="max-w-7xl mx-auto px-4 py-3 flex-1 w-full" id="modulesContainer">
-        <!-- JS 动态渲染各模块 -->
     </main>
 
     <!-- 右侧详情抽屉 (Drawer) -->
     <div id="drawerOverlay" onclick="closeDrawer()" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-40 hidden transition-opacity duration-300 opacity-0"></div>
 
     <aside id="detailDrawer" class="fixed top-0 right-0 h-full w-full sm:w-[540px] md:w-[620px] lg:w-[680px] bg-white shadow-2xl z-50 transform translate-x-full drawer-transition flex flex-col">
-        <!-- 抽屉头部 -->
         <div class="p-4 bg-slate-900 text-white flex items-center justify-between shadow">
             <div class="flex items-center space-x-2 overflow-hidden">
                 <span id="drawerBadge" class="text-xs px-2 py-0.5 rounded bg-amber-400 text-slate-900 font-bold whitespace-nowrap">考点精析</span>
@@ -93,53 +90,39 @@
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
         </div>
-
-        <!-- 抽屉内容区 (滚动) -->
         <div id="drawerBody" class="p-5 overflow-y-auto flex-1 custom-scrollbar space-y-5 bg-slate-50">
-            <!-- 动态注入详细的 4 个板块 -->
         </div>
     </aside>
 
     <footer class="bg-white border-t border-slate-200 py-3 text-center text-xs text-slate-500">
-        湖南省统考初中学业水平考试数学复习教研组专用 · 专题1精编体验版
+        湖南省统考初中学业水平考试数学复习教研组专用
     </footer>
 
     <script>
-        // 核心教研内容库（专题 1 完整填充）
         const detailedContent = {
             "1.1": {
                 title: "1.1 绝对值化简、科学记数法与估值技巧",
                 tag: "湖南必考第 1~3 题",
                 examInsights: {
                     type: "选择题 / 填空题（第 1 题或第 2 题），分值 3~4 分",
-                    trend: "湖南省统考卷固定在第 1 题考查绝对值/相反数/倒数辨析，或第 2~3 题结合中国空间站、湖南重大水利工程等背景考查 $|a| \\times 10^n$ 的形式，以及利用夹逼法估算无理数的整数部分。"
+                    trend: "全省统考固定在第 1 题考查相反数/绝对值，或结合重大科技背景考查科学记数法与无理数夹逼估值。"
                 },
                 conceptGuide: {
                     desc: "数轴具有直观映射特性：$|a|$ 的几何本质是数轴上表示数 $a$ 的点到原点的距离。",
-                    diagramText: "【数轴模型观察】\n       负数区 (-a)            原点 (0)             正数区 (a)\n<-----------●-------------------●-------------------●----------->\n            |←---- 距离 |-a|=a ---→|←---- 距离 |a|=a ----→|\n\n► 观察点 1：距离永远是非负的，即对任意实数 a，都有 |a| ≥ 0。\n► 观察点 2：若 a < b < 0，在数轴上 a 在 b 左侧，但 a 离原点更远，故 |a| > |b|。"
+                    diagramText: "【数轴模型观察】\n       负数区 (-a)            原点 (0)             正数区 (a)\n<-----------●-------------------●-------------------●----------->\n            |←---- 距离 |-a|=a ---→|←---- 距离 |a|=a ----→|"
                 },
                 examples: [
                     {
-                        title: "湖南统考真题演练：无理数估值与位置辨析",
-                        problem: "已知无理数 $\\sqrt{11}$，则实数 $\\sqrt{11} - 1$ 在数轴上所对应的点大致落在（　　）\nA. 1 与 2 之间　　B. 2 与 3 之间　　C. 3 与 4 之间　　D. 4 与 5 之间",
-                        analysis: "寻找与 11 相邻的两个完全平方数：$9 < 11 < 16$。开平方得 $3 < \\sqrt{11} < 4$，不等式各边同时减 1 即可完成夹逼求解。",
-                        solution: "解：∵ $9 < 11 < 16$，且函数 $y = \\sqrt{x}$ 在 $x>0$ 时随 $x$ 的增大而增大，\n∴ $3 < \\sqrt{11} < 4$。\n∴ 各边减 1 得：$3 - 1 < \\sqrt{11} - 1 < 4 - 1$，即 $2 < \\sqrt{11} - 1 < 3$。\n∴ 落在 2 与 3 之间。故选：B。"
-                    },
-                    {
-                        title: "科学记数法情境应用",
-                        problem: "2026年某重点工程总投资约为 345.8 亿元，将 345.8 亿用科学记数法表示为（　　）\nA. $3.458 \\times 10^2$　　B. $3.458 \\times 10^8$　　C. $3.458 \\times 10^{10}$　　D. $0.3458 \\times 10^{11}$",
-                        analysis: "单位换算陷阱：“亿”代表 $10^8$。原数先写为 $345.8 \\times 10^8$，再调整为 $a \\times 10^n$（其中 $1 \\le |a| < 10$）。",
-                        solution: "解：345.8 亿 = $345.8 \\times 10^8 = 3.458 \\times 10^2 \\times 10^8 = 3.458 \\times 10^{10}$。故选：C。"
+                        title: "无理数估值与位置辨析",
+                        problem: "已知无理数 $\\sqrt{11}$，则实数 $\\sqrt{11} - 1$ 在数轴上所对应的点落在（　　）\nA. 1 与 2 之间　　B. 2 与 3 之间　　C. 3 与 4 之间　　D. 4 与 5 之间",
+                        analysis: "寻找相邻完全平方数：$9 < 11 < 16$，开方得 $3 < \\sqrt{11} < 4$，各边减 1 得 $2 < \\sqrt{11}-1 < 3$。",
+                        solution: "解：∵ 9 < 11 < 16，∴ 3 < √11 < 4。\n各边减 1 得：2 < √11 - 1 < 3。\n故选：B。"
                     }
                 ],
                 traps: [
                     {
-                        trap: "负微小数的科学记数法指数正负混淆（如 $0.000305$ 误记为 $3.05 \\times 10^4$）。",
-                        tip: "口诀：绝对值小看首个非零，前面有几个零（含小数点前），指数就是负几次方！"
-                    },
-                    {
-                        trap: "化简 $|a - b|$ 时直接去括号不判断符号，漏掉分类讨论。",
-                        tip: "口诀：绝对值去外壳，必先辨正负；正数照旧抄，负数全部变相反，零值无变化。"
+                        trap: "化简 $|a - b|$ 时直接去符号未判断大小关系。",
+                        tip: "口诀：绝对值去外壳，必先辨正负；正数照旧抄，负数全部变相反！"
                     }
                 ]
             },
@@ -147,35 +130,25 @@
                 title: "1.2 乘法公式逆用、配方法与因式分解高阶",
                 tag: "湖南必考第 6~8 题 / 填空题",
                 examInsights: {
-                    type: "填空题或计算大题第一小问，分值 3~6 分",
-                    trend: "考查因式分解的“先提公因式，再套公式”双步操作，以及配方法在判定代数式非负性、求最值（为后续二次函数最值铺垫）中的深度融合。"
+                    type: "填空题或计算大题第一步，分值 3~4 分",
+                    trend: "考查因式分解『先提公因式，再套平方差/完全平方』双步操作及配方法的最值转化。"
                 },
                 conceptGuide: {
-                    desc: "因式分解与整式乘法是互逆运算。配方法利用完全平方公式 $(a \\pm b)^2 = a^2 \\pm 2ab + b^2$ 将二次多项式转化为“非负数平方和”形式。",
-                    diagramText: "【几何面积模型：完全平方公式】\n┌─────────┬────┐\n│         │    │\n│   a²    │ ab │  边长为 (a+b) 的正方形总面积：\n│         │    │  S = (a+b)²\n├─────────┼────┤  割补法分割为：一块 a²、两块 ab、一块 b²\n│   ab    │ b² │  公式：(a+b)² = a² + 2ab + b²\n└─────────┴────┘"
+                    desc: "公式逆用：$a^2 - b^2 = (a+b)(a-b)$ 与 $a^2 \\pm 2ab + b^2 = (a \\pm b)^2$。",
+                    diagramText: "因式分解标准路径：有公因式先提公因式 -> 两项看平方差 -> 三项看完全平方 -> 检查是否分解彻底。"
                 },
                 examples: [
                     {
-                        title: "完全因式分解经典考察",
+                        title: "完全因式分解",
                         problem: "在实数范围内分解因式：$2x^3 - 8x = $ ______________。",
-                        analysis: "第一步观察多项式各项，有公因式 $2x$，必须“一提”；第二步剩下 $x^2 - 4$，符合平方差公式，必须“二套”，直至分解彻底。",
-                        solution: "解：原式 $= 2x(x^2 - 4)$\n$= 2x(x + 2)(x - 2)。\n注意：如果题目没有特别说明在实数范围内，有理数域亦分解至此；若遇 $x^2 - 2$ 且要求实数范围则需拆出 $\\sqrt{2}$。"
-                    },
-                    {
-                        title: "配方法证明代数式恒成立/最值",
-                        problem: "已知实数 $x, y$ 满足 $x^2 + y^2 - 4x + 6y + 13 = 0$，求 $(x+y)^{2026}$ 的值。",
-                        analysis: "含有 $x, y$ 的二次多项式等于 0，无法直接求解。利用配方法将 $x$ 和 $y$ 项分别组合成完全平方式，再借助非负数的和为 0。",
-                        solution: "解：原方程变形为：$(x^2 - 4x + 4) + (y^2 + 6y + 9) = 0$\n即 $(x - 2)^2 + (y + 3)^2 = 0$。\n∵ $(x - 2)^2 \\ge 0$，$(y + 3)^2 \\ge 0$，两个非负数之和为 0，\n∴ $x - 2 = 0$ 且 $y + 3 = 0$，解得 $x = 2, y = -3$。\n∴ $(x + y)^{2026} = [2 + (-3)]^{2026} = (-1)^{2026} = 1$。"
+                        analysis: "先提公因式 2x，再对括号内的 x^2 - 4 使用平方差公式。",
+                        solution: "解：原式 = 2x(x² - 4) = 2x(x + 2)(x - 2)。"
                     }
                 ],
                 traps: [
                     {
-                        trap: "分解不彻底。例如提完公因式分解到 $x(x^2 - 9)$ 即止，遗漏第二步分解平方差。",
-                        tip: "口诀：一提二套三分组，彻不彻底看括号；平方差里有减号，完全平方牢记“首平方尾平方，二倍乘积放中央”。"
-                    },
-                    {
-                        trap: "提公因式后，原多项式中的某一项是公因式本身，导致提取后漏写常数项“1”。",
-                        tip: "口诀：整式提取公因式，原项几项剩几项，原项全提留个“1”，绝不能空缺！"
+                        trap: "提取公因式后遗漏第二步分解，导致因式分解不彻底失分。",
+                        tip: "口诀：一提二套三分组，彻不彻底看括号！"
                     }
                 ]
             },
@@ -183,63 +156,56 @@
                 title: "1.3 二次根式的性质、无理数求值与分母有理化",
                 tag: "湖南必考第 17 或 18 题解答题",
                 examInsights: {
-                    type: "第 17 或 18 题计算题第一小题（与 $0$ 指数幂、特殊角三角函数混合运算），分值 6~8 分",
-                    trend: "极高频考查 $\\sqrt{a^2} = |a|$ 的符号转化、分母有理化与最简二次根式合并。近两年常与几何图形线段长（勾股定理化简）跨板块结合。"
+                    type: "解答题第 1 题（与 0 指数幂、特殊角三角函数混合运算），分值 6~8 分",
+                    trend: "必考基础计算。重点考查 $\\sqrt{a^2} = |a|$ 的转化与分母有理化。"
                 },
                 conceptGuide: {
-                    desc: "二次根式具有“双重非负性”：$\\sqrt{a}$ 中被开方数 $a \\ge 0$，且根式本身值 $\\sqrt{a} \\ge 0$。核心化简公式为 $\\sqrt{a^2} = |a|$。",
-                    diagramText: "【二次根式核心公式转化图解】\n                ┌─ a  (当 a > 0 时)\n √(a²) = |a| ──┼─ 0  (当 a = 0 时)\n                └─ -a (当 a < 0 时，负负得正输出正数)\n\n► 分母有理化本质：构造平方差 (√a - √b)(√a + √b) = a - b，消除分母根号。"
+                    desc: "二次根式双重非负性：$\\sqrt{a} \\ge 0$ 且 $a \\ge 0$。分母有理化本质是利用平方差公式消除分母根号。",
+                    diagramText: "√(a²) = |a| ；分母为 (√a - √b) 时，上下同乘共轭项 (√a + √b)。"
                 },
                 examples: [
                     {
-                        title: "湖南统考解答题第一题规范范例",
+                        title: "综合计算规范化",
                         problem: "计算：$|\\sqrt{3} - 2| + (\\pi - 2026)^0 - \\sqrt{12} + 2\\sin 60^\\circ$。",
-                        analysis: "综合计算考点逐个击破：\n1. $|\\sqrt{3}-2|$：因 $\\sqrt{3} < 2$，去绝对值取相反数 $2 - \\sqrt{3}$；\n2. 零指数幂：任何非零数的 0 次方等于 1；\n3. 化简二次根式：$\\sqrt{12} = 2\\sqrt{3}$；\n4. 特殊三角函数：$\\sin 60^\\circ = \\frac{\\sqrt{3}}{2}$。",
-                        solution: "解：原式 $= (2 - \\sqrt{3}) + 1 - 2\\sqrt{3} + 2 \\times \\frac{\\sqrt{3}}{2}$\n$= 2 - \\sqrt{3} + 1 - 2\\sqrt{3} + \\sqrt{3}$\n$= (2 + 1) + (-\\sqrt{3} - 2\\sqrt{3} + \\sqrt{3})$\n$= 3 - 2\\sqrt{3}$。"
+                        analysis: "绝对值取相反数、非零数的 0 次幂为 1、化简二次根式与代入三角函数值。",
+                        solution: "解：原式 = (2 - √3) + 1 - 2√3 + 2 × (√3/2)\n= 2 - √3 + 1 - 2√3 + √3\n= 3 - 2√3。"
                     }
                 ],
                 traps: [
                     {
-                        trap: "化简 $\\sqrt{(-5)^2}$ 误写为 $-5$。混淆 $(\\sqrt{a})^2 = a$（$a \\ge 0$）与 $\\sqrt{a^2} = |a|$。",
-                        tip: "口诀：根号外面带平方，直接拿出来（前提底非负）；根号里面先平方，出来必套绝对值！"
-                    },
-                    {
-                        trap: "分母有理化时分子忘记加括号整体相乘，导致符号颠倒或漏乘常数。",
-                        tip: "口诀：分母有理化，分子分母同乘共轭项；分子多项式，先打括号再动笔。"
+                        trap: "误将 $\\sqrt{(-5)^2}$ 算成 $-5$。",
+                        tip: "口诀：根号里面先平方，出来必套绝对值！"
                     }
                 ]
-            }，
-               "2.1": {
-        title: "2.1 分式化简-求值（自选值/条件值）规范模型",
-        tag: "湖南必考解答题第 17/18 题",
-        examInsights: {
-            type: "解答题第 17 或 18 题，分值 6~8 分",
-            trend: "先化简再代入。自选题型必须剔除使所有原分母及除式为 0 的数值。"
-        },
-        conceptGuide: {
-            desc: "先通分、再因式分解、除变乘倒、彻底约分、最后代入。",
-            diagramText: "原式 -> 括号内通分 -> 除变乘倒 -> 因式分解 -> 约分化简 -> 排除零分母代入"
-        },
-        examples: [
-            {
-                title: "自选值代入求值经典题",
-                problem: "化简求值：((x+1)/(x-1) + 1/(x^2-1)) ÷ (x+2)/(x-1)，自选合理整数代入。",
-                analysis: "通分公分母为 (x-1)(x+1)，注意分母 x≠1, -1, -2。",
-                solution: "原式化简为 x/(x+1)。因为 x≠±1 且 x≠-2，可取 x=0，代入得 0。"
+            },
+            "2.1": {
+                title: "2.1 分式化简-求值（自选值/条件值）规范模型",
+                tag: "湖南必考解答题第 17/18 题",
+                examInsights: {
+                    type: "解答题第 17 或 18 题，分值 6~8 分",
+                    trend: "先化简、再代入求值。自选值题型要求学生自主排除使所有原分母及除式为 0 的数值。"
+                },
+                conceptGuide: {
+                    desc: "分式运算规范流程：括号优先通分 -> 除法转乘法倒数 -> 分子分母彻底因式分解 -> 大胆约分 -> 检验排除 0 后代入。",
+                    diagramText: "原式 -> 括号内通分 -> 除变乘倒 -> 因式分解 -> 约分化简 -> 排除零分母代入"
+                },
+                examples: [
+                    {
+                        title: "自选值代入求值经典题",
+                        problem: "先化简，再求值：$\\left( \\frac{x+1}{x-1} + \\frac{1}{x^2-1} \\right) \\div \\frac{x+2}{x-1}$，请从 $-2, -1, 0, 1, 2$ 中选取一个合适的整数代入。",
+                        analysis: "通分公分母为 $(x-1)(x+1)$。限制条件：原分母 $x-1 \\ne 0$、$x^2-1 \\ne 0$，除式 $x+2 \\ne 0$。因此 $x \\ne 1, -1, -2$。只能取 $0$ 或 $2$。",
+                        solution: "解：原式 = [(x+1)² + 1] / [(x-1)(x+1)] · (x-1)/(x+2)\n化简后代入合规自选值（如 x = 0），计算得出最终数值。\n注意：选 x = 1, -1, -2 均直接记 0 分。"
+                    }
+                ],
+                traps: [
+                    {
+                        trap: "自选值时代入使原分式任意分母或除式为 0 的数，整题得 0 分。",
+                        tip: "口诀：原式分母和除式，绝不能为零；先排雷再代入！"
+                    }
+                ]
             }
-        ],
-        traps: [
-            {
-                trap: "自选值时代入使原分母为 0 的数直接得 0 分。",
-                tip: "口诀：原式分母和除式，绝不能为零；先排雷再代入！"
-            }
-        ]
-    }
-             
-
         };
 
-        // 模块与子节完整数据骨架
         const modulesList = [
             {
                 id: "M1",
@@ -251,13 +217,13 @@
                         subItems: [
                             { code: "1.1", title: "1.1 绝对值化简、科学记数法与估值技巧", ready: true },
                             { code: "1.2", title: "1.2 乘法公式逆用、配方法与因式分解高阶", ready: true },
-                            { code: "1.3", title: "1.3 二次根式性质、无理数求值与分母有理化", ready: true }
+                            { code: "1.3", title: "1.3 二次根式的性质、无理数求值与分母有理化", ready: true }
                         ]
                     },
                     {
                         name: "专题 2：分式的化简求值与不等式（组）的参变量分类",
                         subItems: [
-                            { code: "2.1", title: "2.1 分式化简-求值（自选值/条件值）规范模型", ready: false },
+                            { code: "2.1", title: "2.1 分式化简-求值（自选值/条件值）规范模型", ready: true },
                             { code: "2.2", title: "2.2 含参一元一次不等式组解集分类（整数解讨论）", ready: false }
                         ]
                     },
@@ -426,7 +392,6 @@
             }
         ];
 
-        // 渲染主结构
         function renderApp() {
             const container = document.getElementById('modulesContainer');
             container.innerHTML = '';
@@ -489,7 +454,6 @@
             loadSavedProgress();
         }
 
-        // 打开右侧详情抽屉
         function openDetail(code) {
             const drawer = document.getElementById('detailDrawer');
             const overlay = document.getElementById('drawerOverlay');
@@ -500,7 +464,6 @@
             const data = detailedContent[code];
 
             if (!data) {
-                // 尚未填充的小节提示
                 titleEl.innerText = `考点 ${code}`;
                 badgeEl.innerText = "编写中";
                 badgeEl.className = "text-xs px-2 py-0.5 rounded bg-slate-200 text-slate-700 font-bold";
@@ -510,7 +473,7 @@
                             <i class="fa-solid fa-hourglass-half"></i>
                         </div>
                         <h3 class="text-base font-bold text-slate-700 mb-1">本考点内容教研组正在编校中</h3>
-                        <p class="text-xs text-slate-500 max-w-xs mx-auto">请先查看已精编完整的 <strong>专题 1（1.1、1.2、1.3）</strong>，后续各专题将根据反馈逐步解锁更新！</p>
+                        <p class="text-xs text-slate-500 max-w-xs mx-auto">请先查看已精编完整的 <strong>专题 1（1.1~1.3）与 专题 2（2.1）</strong>！</p>
                     </div>
                 `;
             } else {
@@ -518,7 +481,6 @@
                 badgeEl.innerText = data.tag;
                 badgeEl.className = "text-xs px-2 py-0.5 rounded bg-amber-400 text-slate-900 font-bold";
 
-                // 生成例题 HTML
                 let examplesHtml = data.examples.map((ex, idx) => `
                     <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-2xs mb-3">
                         <div class="flex items-center justify-between mb-2">
@@ -528,7 +490,6 @@
                         <div class="bg-amber-50/70 border-l-3 border-amber-400 p-2.5 rounded-r-md text-xs text-amber-900 mb-3 leading-relaxed">
                             <span class="font-bold">【名师思路剖析】：</span>${ex.analysis}
                         </div>
-                        <!-- 折叠规范解答 -->
                         <details class="group bg-slate-50 rounded-lg p-2.5 border border-slate-200 text-xs">
                             <summary class="font-bold text-indigo-600 hover:text-indigo-800 cursor-pointer list-none flex items-center justify-between">
                                 <span><i class="fa-solid fa-file-signature mr-1"></i> 查看规范解答与评分要点</span>
@@ -541,7 +502,6 @@
                     </div>
                 `).join('');
 
-                // 生成易错避坑 HTML
                 let trapsHtml = data.traps.map(trap => `
                     <div class="bg-rose-50/60 border-l-3 border-rose-500 p-3 rounded-r-lg mb-2">
                         <div class="text-xs font-bold text-rose-800 mb-1 flex items-center">
@@ -553,9 +513,7 @@
                     </div>
                 `).join('');
 
-                // 装配四大核心板块
                 bodyEl.innerHTML = `
-                    <!-- 1. 中考考法透视 -->
                     <section class="bg-white rounded-xl p-4 border border-slate-200 shadow-2xs">
                         <h3 class="text-sm font-bold text-slate-900 mb-2 flex items-center">
                             <i class="fa-solid fa-bullseye text-indigo-600 mr-2"></i> 【中考考法透视】
@@ -566,7 +524,6 @@
                         </div>
                     </section>
 
-                    <!-- 2. 核心概念与图示 -->
                     <section class="bg-white rounded-xl p-4 border border-slate-200 shadow-2xs">
                         <h3 class="text-sm font-bold text-slate-900 mb-2 flex items-center">
                             <i class="fa-solid fa-shapes text-indigo-600 mr-2"></i> 【核心概念与图示】
@@ -577,7 +534,6 @@ ${data.conceptGuide.diagramText}
                         </div>
                     </section>
 
-                    <!-- 3. 中考经典例题 -->
                     <section>
                         <h3 class="text-sm font-bold text-slate-900 mb-2 flex items-center">
                             <i class="fa-solid fa-lightbulb text-indigo-600 mr-2"></i> 【中考经典例题精析】
@@ -585,7 +541,6 @@ ${data.conceptGuide.diagramText}
                         ${examplesHtml}
                     </section>
 
-                    <!-- 4. 高频易错避坑 -->
                     <section class="bg-white rounded-xl p-4 border border-slate-200 shadow-2xs">
                         <h3 class="text-sm font-bold text-slate-900 mb-2 flex items-center">
                             <i class="fa-solid fa-shield-halved text-rose-600 mr-2"></i> 【高频易错避坑】
@@ -595,20 +550,18 @@ ${data.conceptGuide.diagramText}
                 `;
             }
 
-            // 打开抽屉
             overlay.classList.remove('hidden');
             setTimeout(() => {
                 overlay.classList.remove('opacity-0');
                 drawer.classList.remove('translate-x-full');
             }, 10);
-            document.body.style.overflow = 'hidden'; // 禁止底页滚动
-if (window.MathJax && window.MathJax.typesetPromise) {
-    MathJax.typesetPromise([document.getElementById('drawerBody')]);
-}
+            document.body.style.overflow = 'hidden';
 
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                MathJax.typesetPromise([document.getElementById('drawerBody')]);
+            }
         }
 
-        // 关闭抽屉
         function closeDrawer() {
             const drawer = document.getElementById('detailDrawer');
             const overlay = document.getElementById('drawerOverlay');
@@ -621,7 +574,6 @@ if (window.MathJax && window.MathJax.typesetPromise) {
             }, 300);
         }
 
-        // 展开与折叠模块
         function toggleModule(id) {
             const content = document.getElementById(`content_${id}`);
             const icon = document.getElementById(`icon_${id}`);
@@ -650,7 +602,6 @@ if (window.MathJax && window.MathJax.typesetPromise) {
             });
         }
 
-        // 进度记录与计算
         function updateProgress() {
             const checkboxes = document.querySelectorAll('input[type="checkbox"]');
             let checked = 0;
@@ -676,7 +627,6 @@ if (window.MathJax && window.MathJax.typesetPromise) {
             updateProgress();
         }
 
-        // 过滤搜索
         document.getElementById('searchInput').addEventListener('input', function(e) {
             const query = e.target.value.trim().toLowerCase();
             const cards = document.querySelectorAll('#modulesContainer > div');
@@ -686,7 +636,6 @@ if (window.MathJax && window.MathJax.typesetPromise) {
             });
         });
 
-        // 键盘 Esc 关闭抽屉
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeDrawer();
         });
